@@ -21,15 +21,6 @@ def forge():
     db.drop_all()
     db.create_all()
 
-    user = User(username="user", type=False)
-    user.password_hash = user.set_password('123')
-
-    shelter = User(username="shelter", type=False)
-    shelter.password_hash = shelter.set_password('123')
-
-    db.session.add(user)
-    db.session.add(shelter)
-
     disease_description = 'Totally healthy'
     animals = [
         {'name': 'cat1', 'cat': True, 'breed': 'Abyssinian', 'color': 'yellow', 'weight': 12.00, 'disease': disease_description},

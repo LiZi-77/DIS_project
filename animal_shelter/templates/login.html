@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2> Welcome to Animal Shelter!</h2>
+<h3>Login</h3>
+
+<form method="post">
+    Username<br>
+    <input type="text" name="username"><br><br>
+    Password<br>
+    <input type="password" name="password"><br><br>
+    <input class="btn" type="submit" name="login" value="Login">
+    <input class="btn" type="submit" name="signup" value="Signup" formaction="{{ url_for('signup') }}">
+</form>
+
+<img alt="meom!" class="meom" src="{{ url_for('static', filename='images/meom.gif') }}" title="meom~">
+{% endblock %}
