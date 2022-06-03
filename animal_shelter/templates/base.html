@@ -20,7 +20,13 @@
     </h2>
     <nav>
         <ul>
-            <li><a href="{{ url_for('login') }}">Home</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Signup</a></li>
+            {% endif %}
         </ul>
         
     </nav>
