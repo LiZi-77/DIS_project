@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section featured">
+    <div class="title">
+      <span></span>
+      <h2>Applications</h2>
+      <span></span>
+    </div>
+    
+    <ul class="movie-list">
+    {% for a in applications %}
+    <li>{{ a.animal_id }}
+        <span class="float-right">
+            <a class="imdb" href= {{ url_for('single_pet', animal_id=a.animal_id)}} target="_blank" title="Animal Details">Details</a>
+        </span>
+        <span class="float-right">
+            <a class="imdb" href= "" target="_blank" title="State">{{a.state}}</a>
+        </span>
+    </li>
+    {% endfor %}
+</ul>
+</section>    
+
+
+{% endblock %}

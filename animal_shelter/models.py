@@ -22,10 +22,11 @@ class Animal(db.Model):
     color = db.Column(db.String(20))
     weight = db.Column(db.Float())
     disease = db.Column(db.String(100))
+    picture = db.Column(db.Text())
     
 class Application(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     animal_id = db.Column(db.Integer)
-    date = db.Column(db.Date())
+    date = db.Column(db.String(20))
     state = db.Column(db.String(50))

@@ -23,17 +23,16 @@ def forge():
 
     disease_description = 'Totally healthy'
     animals = [
-        {'name': 'cat1', 'cat': True, 'breed': 'Abyssinian', 'color': 'yellow', 'weight': 12.00, 'disease': disease_description},
-        {'name': 'cat2', 'cat': True, 'breed': 'American Shorthair', 'color': 'blue', 'weight': 10.00, 'disease': disease_description},
-        {'name': 'cat3', 'cat': True, 'breed': 'Egyptian Mau', 'color': 'white', 'weight': 10.00, 'disease': disease_description},
-        {'name': 'dog1', 'cat': False, 'breed': 'ardedDog', 'color': 'black', 'weight': 20.00, 'disease': disease_description},
-        {'name': 'dog1', 'cat': False, 'breed': 'ardedDog', 'color': 'black', 'weight': 20.00, 'disease': disease_description},
-        {'name': 'dog2', 'cat': False, 'breed': 'American Water Spaniel', 'color': 'white', 'weight': 20.00, 'disease': disease_description},
-        {'name': 'dog3', 'cat': False, 'breed': 'Samoyed', 'color': 'white', 'weight': 20.00, 'disease': disease_description},
+        {'name': 'cat1', 'cat': True, 'breed': 'Abyssinian', 'color': 'yellow', 'weight': 12.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Gustav_chocolate.jpg/800px-Gustav_chocolate.jpg'},
+        {'name': 'cat2', 'cat': True, 'breed': 'American Shorthair', 'color': 'blue', 'weight': 10.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/14_years_old_american_shorthair.jpg/800px-14_years_old_american_shorthair.jpg'},
+        {'name': 'cat3', 'cat': True, 'breed': 'Egyptian Mau', 'color': 'white', 'weight': 10.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Egyptian_Mau_Bronze.jpg/1280px-Egyptian_Mau_Bronze.jpg'},
+        {'name': 'dog1', 'cat': False, 'breed': 'Alaskan Malamute', 'color': 'black', 'weight': 20.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Alaskan_Malamute.jpg'},
+        {'name': 'dog2', 'cat': False, 'breed': 'American Water Spaniel', 'color': 'white', 'weight': 20.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Chien_d%27eau_americain_champion_1.JPG'},
+        {'name': 'dog3', 'cat': False, 'breed': 'Samoyed', 'color': 'white', 'weight': 20.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Samojed00.jpg/1024px-Samojed00.jpg'},
     ]
 
     for a in animals:
-        animal = Animal(name=a['name'],cat=a['cat'], breed=a['breed'], color=a['color'], weight=a['weight'], disease=a['disease'])
+        animal = Animal(name=a['name'],cat=a['cat'], breed=a['breed'], color=a['color'], weight=a['weight'], disease=a['disease'], picture=a['picture'])
         db.session.add(animal)
     
     db.session.commit()

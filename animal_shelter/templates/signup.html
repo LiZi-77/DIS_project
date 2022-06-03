@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Sigup Page</h2>
 
-<form method="post">
-    <input type="radio" name="type" value="user"> User
-    <input type="radio" name="type" value="shelter"> Shelter <br><br>
-
-    Username<br>
-    <input type="text" name="username" required><br><br>
-    Password<br>
-    <input type="password" name="password" required><br><br>
-    <input class="btn" type="submit" name="signup" value="Signup">
-</form>
-
-<img alt="meom!" class="meom" src="{{ url_for('static', filename='images/meom.gif') }}" title="meom~">
+<div class="signup_section">
+    <div class=>
+        <br>
+        <br>
+        <form method="post">
+            <div>
+                <input type="radio" name="type" value="user"> User
+                <input type="radio" name="type" value="shelter"> Shelter <br><br>
+            </div>
+            <div>
+                <input type="text" name="username" required placeholder="Username">
+            </div>
+            <div>
+                <input type="password" name="password" required placeholder="password">
+            </div>
+            <div>
+                <button type="submit" class="call_to-btn btn_white-border">
+                    Signup
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</div>
 {% endblock %}

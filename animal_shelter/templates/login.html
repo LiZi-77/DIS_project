@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<h2> Welcome to Animal Shelter!</h2>
-<h3>Login</h3>
-
-<form method="post">
-    Username<br>
-    <input type="text" name="username"><br><br>
-    Password<br>
-    <input type="password" name="password"><br><br>
-    <input class="btn" type="submit" name="login" value="Login" >
-</form>
 <br>
-
-<img alt="meom!" class="meom" src="{{ url_for('static', filename='images/meom.gif') }}" title="meom~">
+<br>
+<div class="">
+    <div class="contact_section-container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="contact-form">
+            <form method="post">
+              <div>
+                <input type="text" name="username" placeholder="User Name">
+              </div>
+              <div>
+                <input type="password" name="password" placeholder="Password">
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="call_to-btn btn_white-border">
+                  Login
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
