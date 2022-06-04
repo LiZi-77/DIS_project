@@ -54,7 +54,17 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
-                {% if current_user.is_authenticated %}
+                {% if not current_user.is_authenticated %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('index') }}> Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('login') }}> Login <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('signup') }}> Signup <span class="sr-only">(current)</span></a>
+                  </li>                  
+                {% elif current_user.type == False  %}
                   <li class="nav-item active">
                     <a class="nav-link" href={{ url_for ('home') }}> Home <span class="sr-only">(current)</span></a>
                   </li>
@@ -66,13 +76,16 @@
                   </li>
                 {% else %}
                 <li class="nav-item active">
-                  <a class="nav-link" href={{ url_for ('index') }}> Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href={{ url_for ('home') }}> Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href={{ url_for ('login') }}> Login <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href={{ url_for ('application') }}> Application Management <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href={{ url_for ('signup') }}> Signup <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href={{ url_for ('add') }}> Add <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href={{ url_for ('logout') }}> Logout <span class="sr-only">(current)</span></a>
                 </li>
                 {% endif %}
               </ul>

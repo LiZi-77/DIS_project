@@ -412,6 +412,25 @@ a:focus {
   padding: 7px 10px;
 }
 
+.signup_section input[type=number]{
+  border: none;
+  outline: none;
+  background-color: #dedee0;
+  width: 100%;
+  margin: 10px 0;
+  padding: 7px 10px;
+  display: inline-block;
+}
+
+.signup_section input[type=url]{
+  border: none;
+  outline: none;
+  background-color: #dedee0;
+  width: 100%;
+  margin: 10px 0;
+  padding: 7px 10px;
+}
+
 .signup_section input::placeholder {
   color: #fff;
 }

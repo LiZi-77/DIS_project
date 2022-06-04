@@ -3,12 +3,14 @@
 
 <!-- featured products -->
 <section class="section featured">
-  <div class="title">
+    <!-- page title -->
+    <div class="title">
     <span></span>
-    <h2>Animals</h2>
+    <h2>User Home</h2>
     <span></span>
-  </div>
-  <div class="section-center featured-center">
+    </div>
+    <div class="section-center featured-center">
+    <!-- end for page title -->
     <!-- single product -->
     {% for a in animals %}
     <article class="product">
@@ -18,7 +20,6 @@
           class="product-img img"
           alt=""
         />
-
         <div class="product-icons">
           <a href={{ url_for('single_pet', animal_id=a.id) }} class="product-icon">
             <i class="fas fa-search"></i>
@@ -29,7 +30,6 @@
             </button>
           </a>
         </div>
-
       </div>
       <footer>
         <h5 class="product-name">{{ a.name }}</h5>

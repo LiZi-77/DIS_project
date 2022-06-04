@@ -53,6 +53,11 @@ def signup():
         if not username or not password or not user_type:
             flash('Invalid input.')
             return redirect(url_for('signup'))
+        
+        test_user = User.query.filter(User.name == username).all()
+        if test_user:
+            flash("Username already exists, try another one.")
+            return redirect( url_for('signup') )
 
         if user_type == 'user':
             # normal user: type == False
@@ -172,3 +177,39 @@ def search():
         return "This will return the search result using user_home or home.html"
     else:
         return "This is a demo search page. where you can submit your requiements"
+
+@app.route('/add',methods=['GET','POST'])
+@login_required
+def add():
+    if current_user.type == False:
+        flash("You don't have the right to add animals.")
+        return redirect( url_for('home') )
+
+    if request.method == 'POST':
+        cat = request.form['cat']
+        name = request.form['animal_name']
+        breed = request.form['breed']
+        color = request.form['color']
+        weight = request.form['weight']
+        disease = request.form['disease']
+        picture = request.form['picture']
+
+        test_animal = Animal.query.filter(Animal.name == name).all()
+        if test_animal:
+            flash('Animal name already existed, try another one.')
+            return redirect( url_for('add') )
+
+        if cat == 'cat':
+            animal = Animal(name=name, cat=True, breed=breed, color=color, weight=weight, disease=disease, picture=picture)
+            db.session.add(animal)
+            flash("add cat successfully ")
+        else:
+            animal = Animal(name=name, cat=False, breed=breed, color=color, weight=weight, disease=disease, picture=picture)
+            db.session.add(animal)
+            flash("add dog successfully ")
+
+        db.session.commit()
+        return redirect( url_for('home') )
+
+    else:
+        return render_template('add.html')

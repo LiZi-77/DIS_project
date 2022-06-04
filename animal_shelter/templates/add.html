@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="signup_section">
+<!-- page title -->
+<div class="title">
+<span></span>
+<h2>Add Animal into Shelter</h2>
+<span></span>
+</div>
+<!-- end for page title -->
+<div class=>
+    <form method="post">
+        <div>
+            <input type="radio" name="cat" value="cat"> cat
+            <input type="radio" name="cat" value="dog"> dog <br><br>
+        </div>
+        <div>
+            <input type="text" name="animal_name" placeholder="Animal Name">
+        </div>
+        <div>
+            <input type="text" name="breed" placeholder="Breed">
+        </div>
+        <div>
+            <input type="text" name="color" placeholder="Color">
+        </div>
+        <div>
+            Weight: <input type="number" name="weight">
+        </div>  
+        <div>
+            <input type="text" name="disease" placeholder="Health Situation">
+        </div>
+        <div>
+            Link for animal picture:
+            <input type="url" name="picture">
+        </div>
+        <button type="submit" class="call_to-btn btn_white-border">
+            Submit
+        </button>
+    </form>
+</div>
+</div>
+{% endblock %}
