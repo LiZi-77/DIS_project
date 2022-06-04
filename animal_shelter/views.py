@@ -174,9 +174,29 @@ def edit(application_id):
 @login_required
 def search():
     if request.method == 'POST':
-        return "This will return the search result using user_home or home.html"
+        cat = request.form['cat']
+        breed = request.form['breed']
+        color = request.form['color']
+        #搜索结果根据用户分组 用不同的home渲染
+        
+        if cat == 'cat':
+            if color:
+                if breed:
+                    animals = Animal.query.filter(Animal.color==color, Animal.cat==True, Animal.breed==breed).all()
+                else:
+                    animals = Animal.query.filter(Animal.color==color, Animal.cat==True).all()
+            else:
+                animals = Animal.query.filter(Animal.cat==True).all()
+            if current_user.type == False:
+                return render_template('user_home.html', animals=animals)
+            return render_template('shelter_home.html', animals=animals)
+        else:
+            animals = Animal.query.filter(Animal.cat==False).all()
+            if current_user.type == False:
+                return render_template('user_home.html', animals=animals)
+            return render_template('shelter_home.html', animals=animals)
     else:
-        return "This is a demo search page. where you can submit your requiements"
+        return render_template('search.html')
 
 @app.route('/add',methods=['GET','POST'])
 @login_required
