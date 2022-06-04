@@ -61,7 +61,7 @@ body {
 }
 
 .main-heading {
-  color: #082465;
+  color: #b37a18;
   font-weight: bold;
   text-align: center;
 }
@@ -161,7 +161,7 @@ a:focus {
 .navbar-brand span {
   font-size: 20px;
   font-weight: 700;
-  color: #fefefe;
+  color: #b37a18;
 }
 
 .custom_nav-container {
@@ -196,7 +196,7 @@ a:focus {
 }
 
 .hero_detail-box {
-  color: #fefeff;
+  color: #b37a18;
 }
 
 .hero_detail-box h1 {

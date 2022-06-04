@@ -164,3 +164,11 @@ def edit(application_id):
         return redirect( url_for('shelter_application') )
 
     return render_template('edit.html')
+
+@app.route('/search', methods=['GET','POST'])
+@login_required
+def search():
+    if request.method == 'POST':
+        return "This will return the search result using user_home or home.html"
+    else:
+        return "This is a demo search page. where you can submit your requiements"
