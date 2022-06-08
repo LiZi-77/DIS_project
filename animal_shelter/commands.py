@@ -1,5 +1,6 @@
 from animal_shelter import app, db
 from animal_shelter.models import User, Animal, Application
+from werkzeug.security import generate_password_hash
 import click
 
 
@@ -11,7 +12,7 @@ def initdb(drop):
     if drop:
         db.drop_all()
         click.echo('Deleted database.')
-    
+    print('qqqq')
     db.create_all()
     click.echo('Initialized database.')
 
@@ -20,7 +21,6 @@ def forge():
     """Generate fake data."""
     db.drop_all()
     db.create_all()
-
     disease_description = 'Totally healthy'
     animals = [
         {'name': 'cat1', 'cat': True, 'breed': 'Abyssinian', 'color': 'yellow', 'weight': 12.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Gustav_chocolate.jpg/800px-Gustav_chocolate.jpg'},
@@ -36,7 +36,40 @@ def forge():
         db.session.add(animal)
     
     db.session.commit()
-    click.echo('Done.')
+    click.echo('Some forged animals are added into database ')
+
+
+    #False for user, i.e. potential adopters, True for shelter administrators
+    users = [
+        {'username':'Tom', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Peter', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Jerry', 'password_hash':generate_password_hash('abcd'),'type':False},
+        {'username':'Henry', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Jakob', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Lily', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Anna', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Monica', 'password_hash': generate_password_hash('abcd'),'type':False},
+        {'username':'Soft kitty', 'password_hash': generate_password_hash('dcba'),'type':True},
+        {'username':'Warm kitty', 'password_hash': generate_password_hash('dcba'),'type':True},
+        {'username':'Fur ball', 'password_hash': generate_password_hash('dcba'),'type':True}
+    ]
+    for u in users:
+        user=User(username=u['username'], password_hash=u['password_hash'], type=u['type'])
+        db.session.add(user)
+    db.session.commit()
+    click.echo('Some forged users are added into database')
+
+
+    applications = [
+        {'user_id': 3, 'animal_id':6, 'date': '03/06/2021','state':'Approved'},
+        {'user_id': 4, 'animal_id':2, 'date': '04/04/2021','state':'Declined'},
+       ]
+    for a in applications:
+        application=Application(user_id=a['user_id'], animal_id=a['animal_id'], 
+        date=a['date'], state=a['state'])
+        db.session.add(application)
+    db.session.commit()
+    click.echo('Some forged applications are added into database')
 
 
 
