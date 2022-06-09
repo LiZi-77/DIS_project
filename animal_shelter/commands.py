@@ -1,5 +1,5 @@
 from animal_shelter import app, db
-from animal_shelter.models import User, Animal, Application
+from animal_shelter.models import Breed_description, User, Animal, Application
 from werkzeug.security import generate_password_hash
 import click
 
@@ -61,8 +61,10 @@ def forge():
 
 
     applications = [
-        {'user_id': 3, 'animal_id':6, 'date': '03/06/2021','state':'Approved'},
-        {'user_id': 4, 'animal_id':2, 'date': '04/04/2021','state':'Declined'},
+        {'user_id': 3, 'animal_id':6, 'date': '03062021','state':'Approved'},
+        {'user_id': 4, 'animal_id':2, 'date': '04042021','state':'Declined'},
+        {'user_id': 3, 'animal_id':2, 'date': '04042021','state':'submitted'}
+
        ]
     for a in applications:
         application=Application(user_id=a['user_id'], animal_id=a['animal_id'], 
@@ -70,6 +72,30 @@ def forge():
         db.session.add(application)
     db.session.commit()
     click.echo('Some forged applications are added into database')
+
+
+    breed_descriptions = [
+            {'breed': 'Abyssinian', 
+             'detail':'https://en.wikipedia.org/wiki/Abyssinian_cat'},
+            {'breed': 'American_Shorthair',
+             'detail':'https://en.wikipedia.org/wiki/American_Shorthair'},
+             {'breed': 'Egyptian Mau',
+             'detail':'https://en.wikipedia.org/wiki/Egyptian_Mau'},
+              {'breed': 'Persian',
+             'detail':'https://en.wikipedia.org/wiki/Persian_cat'},
+             {'breed': 'Alaskan Malamute',
+             'detail':'https://da.wikipedia.org/wiki/Alaskan_malamute'},
+             {'breed': 'American Water Spaniel',
+             'detail':'https://en.wikipedia.org/wiki/American_Water_Spaniel'},
+             {'breed': 'Samoyed',
+             'detail':'https://en.wikipedia.org/wiki/Samoyed_dog'},
+             {'breed': 'Labrador Retriever',
+             'detail':'https://en.wikipedia.org/wiki/Labrador_Retriever'}]
+    for b in breed_descriptions:
+        desc=Breed_description(breed=b['breed'], details=b['detail'])
+        db.session.add(desc)
+    db.session.commit()
+    click.echo('Some breed descriptions are added into database')
 
 
 
