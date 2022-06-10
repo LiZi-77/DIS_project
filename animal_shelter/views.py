@@ -7,6 +7,8 @@ from flask import render_template
 from flask import request, flash, redirect, url_for
 from flask_login import login_required, logout_user
 from datetime import date 
+#from flask_restful import reqparse
+from sqlalchemy import or_ 
 
 @app.route('/')
 def index():
@@ -133,6 +135,8 @@ def application():
 def user_application():
     '''This user's application'''
     applications = db.session.query(Application).filter(Application.user_id == current_user.id).all()
+    if not applications:
+        flash("You have not made any application yet")
     return render_template('user_application.html', applications=applications)
 
 @app.route('/shelter_delete/<int:animal_id>')
@@ -178,27 +182,30 @@ def edit(application_id):
 @login_required
 def search():
     if request.method == 'POST':
-        cat = request.form['cat']
+        cat_or_not = request.form['cat']=='True'
+        desex_or_not= request.form['desexed']=='True'
         breed = request.form['breed']
+        b1=breed[1:2].lower()
+        b2=breed[-3:-2].lower()
+
         color = request.form['color']
-        #搜索结果根据用户分组 用不同的home渲染
-        
-        if cat == 'cat':
-            if color:
-                if breed:
-                    animals = Animal.query.filter(Animal.color==color, Animal.cat==True, Animal.breed==breed).all()
-                else:
-                    animals = Animal.query.filter(Animal.color==color, Animal.cat==True).all()
-            else:
-                animals = Animal.query.filter(Animal.cat==True).all()
-            if current_user.type == False:
-                return render_template('user_home.html', animals=animals)
-            return render_template('shelter_home.html', animals=animals)
+        #weight = request.form['weight']
+        animals = Animal.query.filter(Animal.color==color, 
+                Animal.cat==cat_or_not, Animal.desexed==desex_or_not).filter(
+            or_(Animal.breed.like("%" + b1 + "%") if breed is not None else ""),
+            (Animal.breed.like("%" + b2 + "%") if breed is not None else "")
+        ).all()
+         
+        #if len(animals)==0:
+        if not animals:
+            flash("No such animals can satisfy your desire. Try some other requirements.")          
+            return render_template('search.html')
+              
+        if current_user.type == False:
+            return render_template('user_home.html', animals=animals)
         else:
-            animals = Animal.query.filter(Animal.cat==False).all()
-            if current_user.type == False:
-                return render_template('user_home.html', animals=animals)
             return render_template('shelter_home.html', animals=animals)
+        
     else:
         return render_template('search.html')
 
@@ -210,8 +217,9 @@ def add():
         return redirect( url_for('home') )
 
     if request.method == 'POST':
-        cat = request.form['cat']
+        cat = request.form['cat']=='true'
         name = request.form['animal_name']
+        desexed = request.form['desexed']=='true'
         breed = request.form['breed']
         color = request.form['color']
         weight = request.form['weight']
@@ -223,14 +231,9 @@ def add():
             flash('Animal name already existed, try another one.')
             return redirect( url_for('add') )
 
-        if cat == 'cat':
-            animal = Animal(name=name, cat=True, breed=breed, color=color, weight=weight, disease=disease, picture=picture)
-            db.session.add(animal)
-            flash("add cat successfully ")
-        else:
-            animal = Animal(name=name, cat=False, breed=breed, color=color, weight=weight, disease=disease, picture=picture)
-            db.session.add(animal)
-            flash("add dog successfully ")
+        animal = Animal(name=name, cat=cat, desexed=desexed, breed=breed, color=color, weight=weight, disease=disease, picture=picture)
+        db.session.add(animal)
+        flash("Now added successfully! ")
 
         db.session.commit()
         return redirect( url_for('home') )

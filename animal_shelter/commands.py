@@ -12,7 +12,6 @@ def initdb(drop):
     if drop:
         db.drop_all()
         click.echo('Deleted database.')
-    print('qqqq')
     db.create_all()
     click.echo('Initialized database.')
 
@@ -23,16 +22,29 @@ def forge():
     db.create_all()
     disease_description = 'Totally healthy'
     animals = [
-        {'name': 'cat1', 'cat': True, 'breed': 'Abyssinian', 'color': 'yellow', 'weight': 12.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Gustav_chocolate.jpg/800px-Gustav_chocolate.jpg'},
-        {'name': 'cat2', 'cat': True, 'breed': 'American Shorthair', 'color': 'blue', 'weight': 10.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/14_years_old_american_shorthair.jpg/800px-14_years_old_american_shorthair.jpg'},
-        {'name': 'cat3', 'cat': True, 'breed': 'Egyptian Mau', 'color': 'white', 'weight': 10.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Egyptian_Mau_Bronze.jpg/1280px-Egyptian_Mau_Bronze.jpg'},
-        {'name': 'dog1', 'cat': False, 'breed': 'Alaskan Malamute', 'color': 'black', 'weight': 20.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Alaskan_Malamute.jpg'},
-        {'name': 'dog2', 'cat': False, 'breed': 'American Water Spaniel', 'color': 'white', 'weight': 20.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Chien_d%27eau_americain_champion_1.JPG'},
-        {'name': 'dog3', 'cat': False, 'breed': 'Samoyed', 'color': 'white', 'weight': 20.00, 'disease': disease_description, 'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Samojed00.jpg/1024px-Samojed00.jpg'},
+        {'name': 'cat1', 'cat': True,  'desexed': False, 'breed':'Abyssinian',
+         'color': 'other', 'weight': 12.00, 'disease': disease_description, 
+         'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Gustav_chocolate.jpg/800px-Gustav_chocolate.jpg'},
+        {'name': 'cat2', 'cat': True,  'desexed': True, 'breed': 'American Shorthair', 
+        'color': 'gray', 'weight': 10.00, 'disease': disease_description, 
+        'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/14_years_old_american_shorthair.jpg/800px-14_years_old_american_shorthair.jpg'},
+        {'name': 'cat3', 'cat': True,  'desexed': True, 'breed': 'Egyptian Mau', 
+        'color': 'brown', 'weight': 10.00, 'disease': disease_description, 
+        'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Egyptian_Mau_Bronze.jpg/1280px-Egyptian_Mau_Bronze.jpg'},
+        {'name': 'dog1', 'cat': False,  'desexed': False, 'breed': 'Alaskan Malamute', 
+        'color': 'gray', 'weight': 20.00, 'disease': disease_description, 
+        'picture': 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Alaskan_Malamute.jpg'},
+        {'name': 'dog2', 'cat': False,  'desexed': True, 'breed': 'American Water Spaniel', 'color': 'brown', 'weight': 20.00, 'disease': disease_description, 
+        'picture': 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Chien_d%27eau_americain_champion_1.JPG'},
+        {'name': 'dog3', 'cat': False,  'desexed': True, 'breed': 'Samoyed', 
+        'color': 'white', 'weight': 20.00, 'disease': disease_description, 
+        'picture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Samojed00.jpg/1024px-Samojed00.jpg'},
     ]
 
     for a in animals:
-        animal = Animal(name=a['name'],cat=a['cat'], breed=a['breed'], color=a['color'], weight=a['weight'], disease=a['disease'], picture=a['picture'])
+        animal = Animal(name=a['name'],cat=a['cat'], desexed=a['desexed'],
+         breed=a['breed'], color=a['color'], weight=a['weight'], 
+         disease=a['disease'], picture=a['picture'])
         db.session.add(animal)
     
     db.session.commit()
@@ -63,7 +75,7 @@ def forge():
     applications = [
         {'user_id': 3, 'animal_id':6, 'date': '03062021','state':'Approved'},
         {'user_id': 4, 'animal_id':2, 'date': '04042021','state':'Declined'},
-        {'user_id': 3, 'animal_id':2, 'date': '04042021','state':'submitted'}
+        {'user_id': 3, 'animal_id':2, 'date': '04042021','state':'Submitted'}
 
        ]
     for a in applications:
