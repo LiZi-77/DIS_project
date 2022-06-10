@@ -4,13 +4,20 @@
 <section class="section featured">
     <div class="title">
       <span></span>
-      <h2>User Applications</h2>
+      <h2>You have applied:</h2>
       <span></span>
     </div>
     
     <ul class="movie-list">
+    <li> Application id
+        <span class="float-right">
+            App. Pet 
+        </span>
+        <span class="float-right">
+         State
+        </span>
     {% for a in applications %}
-    <li>{{ a.animal_id }}
+    <li>{{ a.id }}
         <span class="float-right">
             <a class="imdb" href= {{ url_for('single_pet', animal_id=a.animal_id)}} target="_blank" title="Animal Details">Details</a>
         </span>

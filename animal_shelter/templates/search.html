@@ -11,14 +11,26 @@
 <div class=>
     <form method="post">
         <div>
-            <input required type="radio" name="cat" value="cat"> cat
-            <input required type="radio" name="cat" value="dog"> dog <br><br>
+            type:  <br><br>
+            <input required type="radio" name="cat" value=True> cat
+            <input required type="radio" name="cat" value=False> dog <br><br>
+        </div>
+        <div>
+            Desexed:  <br><br>
+            <input required type="radio" name="desexed" value=True> Yep
+            <input required type="radio" name="desexed" value=False> Not yet <br><br>
+        </div>
+        <div>
+            color:<br><br>
+            <input required type="radio" name="color" value="white"> White 
+            <input required type="radio" name="color" value="brown"> Brown 
+            <input required type="radio" name="color" value="gray"> Gray 
+            <input required type="radio" name="color" value="black"> Black 
+            <input required type="radio" name="color" value="patterned"> Patterned
+            <input required type="radio" name="color" value="other"> Other <br><br>
         </div>
         <div>
             <input type="text" name="breed" placeholder="Breed you want">
-        </div>
-        <div>
-            <input type="text" name="color" placeholder="Color you want">
         </div>
         <button type="submit" class="call_to-btn btn_white-border">
             Submit

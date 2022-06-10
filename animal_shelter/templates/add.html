@@ -11,17 +11,26 @@
 <div class=>
     <form method="post">
         <div>
-            <input type="radio" name="cat" value="cat"> cat
-            <input type="radio" name="cat" value="dog"> dog <br><br>
+            <input  required type="radio" name="cat" value=True> cat
+            <input  required type="radio" name="cat" value=False> dog <br><br>
         </div>
         <div>
-            <input type="text" name="animal_name" placeholder="Animal Name">
+            <input  required type="radio" name="desexed" value=True> desexed
+            <input  required type="radio" name="desexed" value=False> Not yet <br><br>
+        </div>
+        <div>
+            <input required type="radio" name="color" value="white"> white
+            <input required type="radio" name="color" value="black"> black
+            <input required type="radio" name="color" value="gray"> gray
+            <input required type="radio" name="color" value="brown"> brown
+            <input required type="radio" name="color" value="patterned"> patterned
+            <input required type="radio" name="color" value="other"> other
+        </div>
+        <div>
+            <input  required type="text" name="animal_name" placeholder="Animal Name">
         </div>
         <div>
             <input type="text" name="breed" placeholder="Breed">
-        </div>
-        <div>
-            <input type="text" name="color" placeholder="Color">
         </div>
         <div>
             Weight: <input type="number" name="weight">
