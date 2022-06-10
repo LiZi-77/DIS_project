@@ -496,15 +496,15 @@ Featured Products
   width: 2.25rem;
   height: 2.25rem;
   background: var(--primary-500);
-  color: var(--white);
+  color: var(--red);
   display: grid;
   place-items: center;
   border-radius: 50%;
   transition: var(--transition);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.4rem;
   border-color: transparent;
-  margin: 0 0.5rem;
+  margin: 0 0.9rem;
 }
 .product-icon:hover {
   background: var(--primary-700);
