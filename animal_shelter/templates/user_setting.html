@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="">
+    <!-- page title -->
+    <div class="title">
+    <span></span>
+    <h2>Password change</h2>
+    <span></span>
+    </div>
+    <!-- end for page title -->
+    <div class="contact_section-container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="contact-form">
+            <form method="post">
+              <div>
+                <input type="text" name="username" placeholder="Your name">
+              </div>
+              <div>
+                <input type="password" name="o_pass" placeholder="Old Password">
+              </div>
+              <div>
+                <input type="password" name="n_pass" placeholder="New Password">
+              </div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="call_to-btn btn_white-border">
+                  Reset
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

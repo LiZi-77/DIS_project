@@ -29,12 +29,4 @@ class Application(db.Model):
     user_id = db.Column(db.Integer)
     animal_id = db.Column(db.Integer)
     date = db.Column(db.String(20))
-    state = db.Column(db.String(50))
-
-class Breed_description(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    #user_id = db.Column(db.Integer)
-    #animal_id = db.Column(db.Integer)
-    #date = db.Column(db.String(20))
-    breed = db.Column(db.String(50))
-    details = db.Column(db.Text())
+    state = db.Column(db.String(50)) #in process, adopted, un adopted, three states

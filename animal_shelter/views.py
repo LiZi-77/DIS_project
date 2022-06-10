@@ -1,12 +1,15 @@
-#from crypt import methods
+# from crypt import methods
+from pickle import FALSE
 from flask_login import current_user, login_user
-#from requests import request
+from requests import request
 from animal_shelter import app, db
-from animal_shelter.models import Breed_description, User, Animal, Application
+from animal_shelter.models import User, Animal, Application
 from flask import render_template
 from flask import request, flash, redirect, url_for
 from flask_login import login_required, logout_user
-from datetime import date 
+import time
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_sqlalchemy import SQLAlchemy
 
 @app.route('/')
 def index():
@@ -91,15 +94,11 @@ def home():
         animals = Animal.query.filter().all()
         return render_template('user_home.html', animals=animals)
 
-@app.route('/single_pet/<int:animal_id>')
+@app.route('/signle_pet/<int:animal_id>')
 @login_required
 def single_pet(animal_id):
     """show the page of a certain pet."""
-    animal_a= Animal.query.filter(Animal.id==animal_id).first()
-    description_a=Breed_description.query.filter(
-        Breed_description.breed==animal_a.breed).first()
-    return render_template('animal_detail.html', animals=animal_a, 
-        descriptions=description_a)
+    return "certain page for animal " + str(animal_id)
 
 @app.route('/apply/<int:animal_id>/<int:user_id>') 
 @login_required
@@ -107,13 +106,13 @@ def apply(animal_id,user_id):
     '''add this application into database'''
     apply = Application.query.filter(Application.user_id==current_user.id, Application.animal_id==animal_id).first()
     if apply:
-        flash("You have already applied for this pet.")
+        flash("You have already apply for this pet.")
         animals = Animal.query.filter().limit(6)
         return render_template('user_home.html', animals=animals)
-    else:
-        application = Application(animal_id=animal_id, user_id=user_id, date=date.today().strftime("%d%m%Y"), state="submitted")
-        db.session.add(application)
-        db.session.commit()
+
+    application = Application(animal_id=animal_id, user_id=user_id, date='3/6/2022', state="submitted")
+    db.session.add(application)
+    db.session.commit()
 
     '''return to the user home page'''
     flash("Application submitted.")
@@ -237,3 +236,37 @@ def add():
 
     else:
         return render_template('add.html')
+
+
+@app.route('/usersetting/',methods=['GET', 'POST'])
+def usersetting():
+    if request.method == 'POST':
+        #get the list data
+        username = request.form['username']
+        o_pass = request.form['o_pass']
+        n_pass = request.form['n_pass']
+        o_hash = generate_password_hash(o_pass)
+        n_hash = generate_password_hash(n_pass)
+        user = User(password_hash=o_hash, type=False)
+        user_1 = User.query.filter(User.username == username).first()
+        
+        
+        if not check_password_hash(user_1.password_hash, o_pass):
+            flash('Invalid old password')
+            return redirect(url_for('usersetting'))
+        
+        
+        if user.validate_password(n_pass):
+            flash('Same password, try another one')
+            return redirect(url_for('usersetting'))
+        else:
+            user_1.password_hash = n_hash
+            flash('Password changed successfully')
+            db.session.commit()
+
+            return redirect(url_for('home'))
+    else:
+        return render_template('user_setting.html')
+        
+
+            
