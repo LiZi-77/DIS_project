@@ -67,7 +67,7 @@ def signup():
             flash("Username already exists, try another one.")
             return redirect( url_for('signup') )
 
-        typ = True if user_type == 'user' else False
+        typ = True if user_type == 'shelter' else False
         gen = True if gender == 'male' else False
 
         user = User(username=username,type=typ, mobile = mobile, age = age,
@@ -174,7 +174,7 @@ def shelter_delete(animal_id):
 @login_required
 def shelter_application():
     applications = Application.query.filter(Application.state == "submitted").all()
-    animals = Animal.query.filter(Animal.id == Application.animal_id ).all()
+    #animals = Animal.query.filter(Animal.id == Application.animal_id ).all()
     return render_template('shelter_application.html',applications=applications)
 
 @app.route('/edit/<int:application_id>', methods=['GET','POST'])
