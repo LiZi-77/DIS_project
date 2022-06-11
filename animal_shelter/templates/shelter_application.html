@@ -8,21 +8,39 @@
       <h2>Applications Management</h2>
       <span></span>
     </div>
-    <!-- end for page title -->
-    
-    <!-- list section -->
-    <ul class="movie-list">
-    {% for a in applications %}
-    <li>{{ a.animal_id }}
-        <span class="float-right">
-            <a class="imdb" href= {{ url_for('single_pet', animal_id=a.animal_id)}} target="_blank" title="Animal Details">Details</a>
-        </span>
-        <span class="float-right">
-            <a class="imdb" href={{ url_for('edit', application_id=a.id) }}>Edit</a>
-        </span>  
-    </li>
-    {% endfor %}
-    </ul>
+    <ul class="movie-list"><table class="table">
+      <tr>
+        <th>Case id</th>
+        <th>Applier id</th>
+        <th>Applier </th>
+        <th>Submitted date</th>
+        <th>Applied animal id </th>
+        <th>Applied animal </th>
+        <th>Reply</th>
+      </tr>
+      {% for a in applications %}
+      <tr>
+        <td>{{a.id}}</td>
+        <td>{{a.user_id}}</td>
+        <td><span class="float-left">  <a class="imdb" 
+          href= {{ url_for('single_user', user_id=a.user_id)}} 
+          target="_blank"> Details</td>
+        <td>{{a.date}}</td>
+        <td>{{a.animal_id}}</td>
+        <td><span class="float-left">  <a class="imdb" 
+            href= {{ url_for('single_pet', animal_id=a.animal_id)}} 
+            target="_blank"> Details</a>
+        </span></td>
+        <td><span class="float-left"> <a class="imdb" 
+            href= {{ url_for('edit', application_id=a.id)}} 
+            target="_blank" >Click to reply</a>
+        </span></td>
+      </tr>
+      {% endfor %}
+    </table>
+        </ul>
+
+    </div>
     <!-- end for list section -->
 </section>  
   

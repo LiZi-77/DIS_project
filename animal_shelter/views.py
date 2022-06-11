@@ -9,6 +9,7 @@ from flask_login import login_required, logout_user
 from datetime import date 
 #from flask_restful import reqparse
 from sqlalchemy import or_ 
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/')
 def index():
@@ -51,6 +52,11 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         user_type = request.form['type']
+        mobile = request.form['mobile']
+        gender = request.form['gender']
+        post = request.form['post']
+        occupation = request.form['occupation']
+        age = request.form['age']
 
         if not username or not password or not user_type:
             flash('Invalid input.')
@@ -61,12 +67,12 @@ def signup():
             flash("Username already exists, try another one.")
             return redirect( url_for('signup') )
 
-        if user_type == 'user':
-            # normal user: type == False
-            user = User(username=username,type=False)
-        else:
-            # shelter: type == Ture
-            user = User(username=username,type=True)
+        typ = True if user_type == 'user' else False
+        gen = True if gender == 'male' else False
+
+        user = User(username=username,type=typ, mobile = mobile, age = age,
+        post = post, occupation = occupation, gender = gen)
+
         user.set_password(password=password)
         db.session.add(user)
         db.session.commit()
@@ -103,6 +109,14 @@ def single_pet(animal_id):
     return render_template('animal_detail.html', animals=animal_a, 
         descriptions=description_a)
 
+@app.route('/single_user/<int:user_id>')
+@login_required
+def single_user(user_id):
+    """show the page of a certain user."""
+    user_a= User.query.filter(User.id==user_id).first()
+    return render_template('user_detail.html', users=user_a)
+
+
 @app.route('/apply/<int:animal_id>/<int:user_id>') 
 @login_required
 def apply(animal_id,user_id):
@@ -113,7 +127,8 @@ def apply(animal_id,user_id):
         animals = Animal.query.filter().limit(6)
         return render_template('user_home.html', animals=animals)
     else:
-        application = Application(animal_id=animal_id, user_id=user_id, date=date.today().strftime("%d%m%Y"), state="submitted")
+        application = Application(animal_id=animal_id, user_id=user_id, 
+        date=date.today().strftime("%x"), state="submitted")
         db.session.add(application)
         db.session.commit()
 
@@ -159,7 +174,8 @@ def shelter_delete(animal_id):
 @login_required
 def shelter_application():
     applications = Application.query.filter(Application.state == "submitted").all()
-    return render_template('shelter_application.html', applications=applications)
+    animals = Animal.query.filter(Animal.id == Application.animal_id ).all()
+    return render_template('shelter_application.html',applications=applications)
 
 @app.route('/edit/<int:application_id>', methods=['GET','POST'])
 @login_required
@@ -200,11 +216,12 @@ def search():
         if not animals:
             flash("No such animals can satisfy your desire. Try some other requirements.")          
             return render_template('search.html')
-              
-        if current_user.type == False:
-            return render_template('user_home.html', animals=animals)
+   
+        #if not current_user.is_authenticated: 
+        if current_user.type == True:
+           return render_template('shelter_home.html',animals=animals)
         else:
-            return render_template('shelter_home.html', animals=animals)
+           return render_template('user_home.html', animals=animals)
         
     else:
         return render_template('search.html')
@@ -240,3 +257,49 @@ def add():
 
     else:
         return render_template('add.html')
+
+
+
+
+@app.route('/usersetting',methods=['GET', 'POST'])
+@login_required
+def usersetting():
+    if request.method == 'POST':
+        #get the list data
+        username = request.form['username']
+        o_pass = request.form['o_pass']
+        n_pass = request.form['n_pass']
+        c_pass = request.form['c_pass']
+        n_hash = generate_password_hash(n_pass)
+     
+        if not current_user.username==username:
+            flash('Invalid username, check it')
+            return redirect(url_for('usersetting'))
+        
+        if not check_password_hash(current_user.password_hash, o_pass):
+            flash('Invalid old password')
+            return redirect(url_for('usersetting'))
+          
+        if check_password_hash(current_user.password_hash, n_pass):
+            flash('Same password, try a new one')
+            return redirect(url_for('usersetting'))
+
+        if not check_password_hash(n_hash, c_pass): 
+            flash('The two new passwords do not match, entry again')
+            return redirect(url_for('usersetting')) 
+
+        current_user.password_hash = n_hash
+        flash('Password reset successfully')
+        db.session.commit()
+
+        if current_user.type == False:
+            return render_template('user_home.html')
+        return render_template('shelter_home.html')
+
+        #return redirect(url_for('home'))
+    else:
+        return render_template('user_setting.html')
+        
+
+            
+

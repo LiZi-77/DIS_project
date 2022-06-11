@@ -7,6 +7,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
     type = db.Column(db.Boolean)
+    mobile = db.Column(db.String(30))
+    gender = db.Column(db.Boolean) # kvinder 0 og mand 1
+    age = db.Column(db.Integer)
+    occupation = db.Column(db.String(20))
+    post=db.Column(db.Integer)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -34,8 +39,5 @@ class Application(db.Model):
 
 class Breed_description(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    #user_id = db.Column(db.Integer)
-    #animal_id = db.Column(db.Integer)
-    #date = db.Column(db.String(20))
     breed = db.Column(db.String(50))
     details = db.Column(db.Text())
