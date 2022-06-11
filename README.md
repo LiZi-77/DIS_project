@@ -20,7 +20,10 @@ Assumes a working Python 3 installation (with python=python3 and pip=pip3).
 
 >$ flask run
 
-Note: All forged users with password abcd, and forged administrators with password dcba.
+Note: 
+1. All forged users with password abcd, and forged administrators with password dcba.
+2. For mac user, input 'export FLASK_APP=animal_shelter' in the terminal before run flask commands.
+
 
 
 # About:
