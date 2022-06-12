@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.png') }}">
+  <title>Animal Shelter</title>
+  <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+  <!-- progress barstle -->
+  <link rel="stylesheet" {{ url_for('static', filename='css/css-circular-prog-bar.css') }}>
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- font wesome stylesheet -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{{ url_for('static', filename='css/responsive.css') }}" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div class="top_container">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <img src={{ url_for('static', filename='images/logo.png') }} alt="">
+            <span>
+              Animal Shelter
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                {% if not current_user.is_authenticated %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('index') }}> Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('login') }}> Login <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('signup') }}> Signup <span class="sr-only">(current)</span></a>
+                  </li>                  
+                {% elif current_user.type == False  %}
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('home') }}> Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('application') }}> Application <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('usersetting') }}> Reset password <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href={{ url_for ('logout') }}> Logout <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <form action={{ url_for('search')}} class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                      <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                    </form>
+                  </li>
+                {% else %}
+                <li class="nav-item active">
+                  <a class="nav-link" href={{ url_for ('home') }}> Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href={{ url_for ('application') }}> Application Management <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href={{ url_for ('add') }}> Add pets <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href={{ url_for ('usersetting') }}> Reset password <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href={{ url_for ('logout') }}> Logout <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <form action={{ url_for('search')}} class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                    <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                  </form>
+                </li>
+                {% endif %}
+              </ul>
+
+
+            </div>
+        </nav>
+      </div>
+    </header>
+    
+    
+    {% for message in get_flashed_messages() %}
+      <div class ="alert">{{ message }}</div>
+    {% endfor %}
+    
+
+    {% block content %}{% endblock %}
+  </div>
+  <!-- end header section -->
+
+
+  <script type="text/javascript" src={{ url_for('static', filename='js/jquery-3.4.1.min.js') }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename='js/bootstrap.js') }}></script>
+  
+</body>
+
+</html>

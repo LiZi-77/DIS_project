@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section featured">
+    <div class="title">
+      <span></span>
+      <h2>You have applied:</h2>
+      <span></span>
+    </div>
+    <ul class="movie-list">
+    <table class="table">
+      <tr>
+        <th>Application id</th>
+        <th>Submitted date</th>
+        <th>State</th>
+        <th>Applied animal</th>
+      </tr>
+      {% for a in applications %}
+      <tr>
+        <td>{{a.id}}</td>
+        <td>{{a.date}}</td>
+        <td>{{a.state}}</td>
+        <td><span class="float-left">
+            <a class="imdb" href= {{ url_for('single_pet', animal_id=a.animal_id)}} 
+            target="_blank" title="Animal Details">Details</a>
+        </span></td>
+      </tr>
+      {% endfor %}
+    </table>
+</ul>
+</section>    
+
+{% endblock %}

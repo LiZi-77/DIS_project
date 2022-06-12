@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- featured products -->
+<section class="section featured">
+    <!-- page title -->
+    <div class="title">
+    <span></span>
+    <h2>User Home</h2>
+    <span></span>
+    </div>
+    <div class="section-center featured-center">
+    <!-- end for page title -->
+    <!-- single product -->
+    {% for a in animals %}
+    <article class="product">
+      <div class="product-container">
+        <img
+          src={{ a.picture }}
+          class="product-img img"
+          alt=""
+        />
+        <div class="product-icons">
+          <a href={{ url_for('single_pet', animal_id=a.id) }} class="product-icon"> More
+            <i class="fas fa-search"></i>
+          </a>
+          <a href={{ url_for ('apply', animal_id=a.id, user_id=current_user.id) }}>
+            <button class="product-cart-btn product-icon" data-id="1" > Apply
+            <i class="fas fa-heart"></i>
+            </button>
+          </a>
+        </div>
+      </div>
+      <footer>
+        <h5 class="product-name">{{ a.name }}</h5>
+        <span class="Breed">{{ a.breed }}</span>
+      </footer>
+    </article>
+    <!-- end of single product -->
+    {% endfor %}
+  </div>
+  <a href="user_home/html" class="btn"> all animals </a>
+</section>
+
+
+{% endblock %}

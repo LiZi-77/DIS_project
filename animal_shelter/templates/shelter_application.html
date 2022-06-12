@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section featured">
+    <!-- page title -->
+    <div class="title">
+      <span></span>
+      <h2>Applications Management</h2>
+      <span></span>
+    </div>
+    <ul class="movie-list"><table class="table">
+      <tr>
+        <th>Case id</th>
+        <th>Applier id</th>
+        <th>Applier </th>
+        <th>Submitted date</th>
+        <th>Applied animal id </th>
+        <th>Applied animal </th>
+        <th>Reply</th>
+      </tr>
+      {% for a in applications %}
+      <tr>
+        <td>{{a.id}}</td>
+        <td>{{a.user_id}}</td>
+        <td><span class="float-left">  <a class="imdb" 
+          href= {{ url_for('single_user', user_id=a.user_id)}} 
+          target="_blank"> Details</td>
+        <td>{{a.date}}</td>
+        <td>{{a.animal_id}}</td>
+        <td><span class="float-left">  <a class="imdb" 
+            href= {{ url_for('single_pet', animal_id=a.animal_id)}} 
+            target="_blank"> Details</a>
+        </span></td>
+        <td><span class="float-left"> <a class="imdb" 
+            href= {{ url_for('edit', application_id=a.id)}} 
+            target="_blank" >Click to reply</a>
+        </span></td>
+      </tr>
+      {% endfor %}
+    </table>
+        </ul>
+
+    </div>
+    <!-- end for list section -->
+</section>  
+  
+{% endblock %}

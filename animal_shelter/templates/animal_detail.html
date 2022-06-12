@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section class="section featured">
+    <!-- page title -->
+    <div class="title">
+    <span></span>
+    <h2>More About {{animals[2]}}:</h2>
+    <span></span>
+    <!-- descriptions -->
+    </div>
+    <div class="leftM">
+    <img
+        src={{ animals[8] }}
+        class="product-img img"
+        alt=""
+    />
+    <h6>Name: {{animals[2]}} </h6>
+    <h6>Color: {{animals[5]}}</h6>
+    <h6>Desexed: {% if animals[4]==true  %} 
+        Yep {% else %} Not yet {% endif %}</h6>
+    <h6>Weight: {{animals[6]}}</h6>
+    <h6>Healthy condition: {{animals[7]}}</h6>
+    <h6>Breed: {{animals[1] }}</h6>
+    <h6>More about breed:  <a href="{{descriptions}}" target="_blank">Seen in Wikipedia</a>  </h6>
+    </div>
+
+
+</section>
+{% endblock %}

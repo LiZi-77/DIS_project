@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="signup_section">
+<!-- page title -->
+<div class="title">
+<span></span>
+<h2>Search Page</h2>
+<span></span>
+</div>
+<!-- end for page title -->
+<div class=>
+    <form method="post">
+        <div>
+            type:  <br><br>
+            <input required type="radio" name="cat" value=True> cat
+            <input required type="radio" name="cat" value=False> dog <br><br>
+        </div>
+        <div>
+            Desexed:  <br><br>
+            <input required type="radio" name="desexed" value=True> Yep
+            <input required type="radio" name="desexed" value=False> Not yet <br><br>
+        </div>
+        <div>
+            color:<br><br>
+            <input required type="radio" name="color" value="white"> White 
+            <input required type="radio" name="color" value="brown"> Brown 
+            <input required type="radio" name="color" value="gray"> Gray 
+            <input required type="radio" name="color" value="black"> Black 
+            <input required type="radio" name="color" value="patterned"> Patterned
+            <input required type="radio" name="color" value="other"> Other <br><br>
+        </div>
+        <div>
+            <input type="text" name="breed" placeholder="Breed you want">
+        </div>
+        <button type="submit" class="call_to-btn btn_white-border">
+            Submit
+        </button>
+    </form>
+</div>
+</div>
+{% endblock %}

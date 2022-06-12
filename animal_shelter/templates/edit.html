@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="signup_section">
+    <!-- page title -->
+    <div class="title">
+    <span></span>
+    <h3>Reply the application</h3>
+    <span></span>
+    </div>
+    <!-- end for page title -->
+    <div class=>
+        <form method="post">
+            <div>
+                <input type="radio" name="decision" value="Approve"> Approve
+                <input type="radio" name="decision" value="Decline"> Decline <br><br>
+            </div>
+            <div>
+                <button type="submit" class="call_to-btn btn_white-border">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+{% endblock %}

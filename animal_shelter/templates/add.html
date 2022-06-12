@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="signup_section">
+<!-- page title -->
+<div class="title">
+<span></span>
+<h3>Add Animal into Shelter</h3>
+<span></span>
+</div>
+<!-- end for page title -->
+<div class=>
+    <form method="post">
+        <div>
+            <input  required type="radio" name="cat" value=True> cat
+            <input  required type="radio" name="cat" value=False> dog <br><br>
+        </div>
+        <div>
+            <input  required type="radio" name="desexed" value=True> desexed
+            <input  required type="radio" name="desexed" value=False> Not yet <br><br>
+        </div>
+        <div>
+            <input required type="radio" name="color" value="white"> white
+            <input required type="radio" name="color" value="black"> black
+            <input required type="radio" name="color" value="gray"> gray
+            <input required type="radio" name="color" value="brown"> brown
+            <input required type="radio" name="color" value="patterned"> patterned
+            <input required type="radio" name="color" value="other"> other
+        </div>
+        <div>
+            <input  required type="text" name="animal_name" placeholder="Animal Name">
+        </div>
+        <div>
+            <input type="text" name="breed" placeholder="Breed">
+        </div>
+        <div>
+            Weight: <input type="number" name="weight" placeholder="kg">
+        </div>  
+        <div>
+            <input type="text" name="disease" placeholder="Health Condition">
+        </div>
+        <div>
+            Link for animal picture:
+            <input type="url" name="picture">
+        </div>
+        <button type="submit" class="call_to-btn btn_white-border">
+            Submit
+        </button>
+    </form>
+</div>
+</div>
+{% endblock %}

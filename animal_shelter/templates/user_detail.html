@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<section class="section featured">
+    <!-- page title -->
+    <div class="title">
+    <span></span>
+    <h2>More About {{users.username}}:</h2>
+    <span></span>
+    <!-- descriptions -->
+    </div>
+    <div class="leftM">
+    <h6>Id: {{users[0]}} </h6>
+    <h6>Name: {{users[1]}} </h6>
+    <h6>Status: {% if users[3]==false  %} 
+        user {% else %} Administrator {% endif %}</h6>
+    <h6>Mobile: {{users[4]}}</h6>
+    <h6>Gender: {% if users[5]==false  %} 
+        Male {% else %} Female {% endif %}</h6>
+    <h6>Age: {{users[6]}}</h6>
+    <h6>Occupation: {{users[7]}}</h6>
+    <h6>Post: {{users[8]}}</h6>
+  </div>
+
+</section>
+{% endblock %}

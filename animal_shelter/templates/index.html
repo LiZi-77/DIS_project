@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero_section ">
+    <div class="hero-container container">
+      <div class="hero_detail-box">
+        <h3>
+          Welcome to Best 
+        </h3>
+        <h1>
+          animal shelter
+        </h1>
+        <br>
+        <div class="hero_btn-continer">
+          <a href={{ url_for ('login') }} class="call_to-btn btn_white-border">
+            <span>
+              Login
+            </span>
+            <img src={{ url_for('static', filename='images/right-arrow.png') }} alt="">
+          </a>
+        </div>
+      </div>
+      <div class="hero_img-container">
+        <div>
+          <img src={{ url_for('static', filename='images/hero.png') }} alt="" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <h2 class="main-heading ">
+        About US
+      </h2>
+      <p class="text-left">      
+      Animal Shelter is a non-profit association founded in 2020 
+      and financed mainly by donations. </p>
+      <p class="text-left">  
+      Our work includes rescue and care for animals 
+      and helping animals find a responsible owner. </p>
+      <p class="text-left">  
+      All of our work is managed by volunteers. 
+      </p>
+      <div class="about_img-box ">
+        <img src={{ url_for('static', filename='images/about_cat.webp') }} alt="" class="img-fluid w-100">
+      </div>
+      <div class="d-flex justify-content-center mt-5">
+        <a href="" class="call_to-btn  ">
+
+          <span>
+            Read More
+          </span>
+          <img src={{ url_for('static', filename='images/right-arrow.png') }} alt="">
+        </a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
